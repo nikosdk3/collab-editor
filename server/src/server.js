@@ -3,7 +3,7 @@ import { createServer } from "http";
 import { Server } from "socket.io";
 import dotenv from "dotenv";
 import cors from "cors";
-import connectDB from "./config/database";
+import connectDB from "./config/database.js";
 
 dotenv.config();
 
@@ -38,7 +38,7 @@ io.on("connection", (socket) => {
   });
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 httpServer.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
