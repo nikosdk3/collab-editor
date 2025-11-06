@@ -1,11 +1,7 @@
 import mongoose from "mongoose";
 import activeUserSchema from "./activeUserSchema";
 import versionSchema from "./versionSchema";
-
-const DEFAULT_DOCUMENT_CONTENT = {
-  type: "doc",
-  content: [],
-};
+import { DEFAULT_DOCUMENT_CONTENT } from "../constants";
 
 const documentSchema = new mongoose.Schema(
   {
