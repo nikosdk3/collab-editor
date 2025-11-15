@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import connectDB from "./config/database.js";
 import routes from "./routes/index.js";
+import { initializeSocket } from "./socket/index.js";
 
 dotenv.config();
 
@@ -28,6 +29,8 @@ app.use(express.json());
 connectDB();
 
 app.use("/api", routes);
+
+initializeSocket(io);
 
 io.on("connection", (socket) => {
   console.log("User connected:", socket.id);
