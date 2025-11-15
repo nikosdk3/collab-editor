@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import { DEFAULT_DOCUMENT_CONTENT, MAX_VERSIONS } from "./constants";
-import documentSchema from "./schemas/documentSchema";
+import { DEFAULT_DOCUMENT_CONTENT, MAX_VERSIONS } from "../constants.js";
+import documentSchema from "./schemas/documentSchema.js";
 
 // Indexes
 
@@ -75,7 +75,7 @@ documentSchema.methods.restoreVersion = function (versionNumber) {
     (version) => version.versionNumber === versionNumber
   );
 
-  if (!verison) {
+  if (!version) {
     throw new Error(`Version ${versionNumber} not found`);
   }
 

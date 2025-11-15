@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-import activeUserSchema from "./activeUserSchema";
-import versionSchema from "./versionSchema";
-import { DEFAULT_DOCUMENT_CONTENT } from "../constants";
+import activeUserSchema from "./activeUserSchema.js";
+import versionSchema from "./versionSchema.js";
+import { DEFAULT_DOCUMENT_CONTENT } from "../../constants.js";
 
 const documentSchema = new mongoose.Schema(
   {
