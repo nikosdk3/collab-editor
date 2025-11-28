@@ -32,14 +32,6 @@ app.use("/api", routes);
 
 initializeSocket(io);
 
-io.on("connection", (socket) => {
-  console.log("User connected:", socket.id);
-
-  socket.on("disconnect", () => {
-    console.log("User disconnected", socket.id);
-  });
-});
-
 app.use((err, req, res, next) => {
   console.error("Error:", err);
   res.status(err.status || 500).json({
