@@ -128,7 +128,7 @@ export const handleDocumentSocket = (socket, io) => {
 
       io.to(`doc-${documentId}`).emit("document-saved", {
         versionNumber: document.currentVersion - 1,
-        timestamp: newVersion.createdBy,
+        timestamp: newVersion.createdAt,
       });
 
       console.log(
