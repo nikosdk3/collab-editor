@@ -238,7 +238,7 @@ export const getDocumentVersions = async (req, res) => {
 export const restoreDocumentVersion = async (req, res) => {
   try {
     const { id, versionNumber } = req.params;
-    
+
     const document = await Document.findById(id);
 
     if (!document) {

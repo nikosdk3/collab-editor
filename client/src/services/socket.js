@@ -123,7 +123,7 @@ class SocketService {
     this.socket.on("document-saved", callback);
   }
 
-  onTitleUpdate(callback) {
+  onTitleUpdated(callback) {
     if (!this.socket) return;
     this.socket.on("title-updated", callback);
   }

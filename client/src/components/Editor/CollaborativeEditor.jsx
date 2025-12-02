@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import Toolbar from "./Toolbar";
-import { debounce } from "../../utils/helper";
-import socketService from "../../services/socket";
-import ActiveUsers from "./ActiveUsers";
 import { Clock, Loader2, Save } from "lucide-react";
+import Toolbar from "./Toolbar";
+import ActiveUsers from "./ActiveUsers";
+import socketService from "../../services/socket";
+import { debounce } from "../../utils/helpers";
 
 const CollaborativeEditor = ({
   documentId,
@@ -23,8 +23,7 @@ const CollaborativeEditor = ({
     content: initialContent || "<p>Start typing...</p>",
     editorProps: {
       attributes: {
-        class:
-          "prose prose-sm sm:prose lg:prose-lg mx-auto focus:outline-none min-h-[500px]",
+        class: "prose prose-sm lg:prose mx-auto focus:outline-none",
       },
     },
     onUpdate: ({ editor }) => {
@@ -110,7 +109,7 @@ const CollaborativeEditor = ({
     socketService.onUserJoined(handleUserJoined);
     socketService.onUserLeft(handleUserLeft);
     socketService.onDocumentSaved(handleDocumentSaved);
-    socketService.onTitleUpdate(handleTitleUpdated);
+    socketService.onTitleUpdated(handleTitleUpdated);
 
     return () => {
       socketService.off("receive-changes", handleReceiveChanges);
@@ -136,12 +135,14 @@ const CollaborativeEditor = ({
   }
 
   return (
-    <div>
+    <div className="overflow-hidden rounded-lg bg-white shadow-lg">
       <ActiveUsers users={activeUsers} currentUser={currentUser} />
 
       <Toolbar editor={editor} />
 
-      <EditorContent editor={editor} />
+      <div className="p-6">
+        <EditorContent editor={editor} />
+      </div>
 
       <div className="flex items-center justify-between border-t border-gray-300 bg-gray-50 px-4 py-2 text-sm text-gray-600">
         <div className="flex items-center gap-2">

@@ -10,11 +10,11 @@ documentSchema.index({ createdAt: -1 });
 // Instance Methods
 
 documentSchema.methods.saveVersion = function (userId = "anonymous") {
-  const newVersion = {
+  const newVersion = this.versions.create({
     content: JSON.parse(JSON.stringify(this.content)),
     createdBy: userId,
     versionNumber: this.currentVersion,
-  };
+  });
 
   this.versions.push(newVersion);
 

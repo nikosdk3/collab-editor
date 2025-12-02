@@ -5,7 +5,7 @@ import autoprefixer from "autoprefixer";
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss(), autoprefixer()],
+  plugins: [react(), tailwindcss(), autoprefixer(), ],
   server: {
     port: 5173,
     proxy: {
