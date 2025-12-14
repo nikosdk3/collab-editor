@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { Clock, Loader2, Save } from "lucide-react";
+import { Check, Clock, Loader2, Save } from "lucide-react";
 import Toolbar from "./Toolbar";
 import ActiveUsers from "./ActiveUsers";
 import socketService from "../../services/socket";
@@ -17,6 +17,7 @@ const CollaborativeEditor = ({
   const [currentUser, setCurrentUser] = useState(null);
   const [isSaving, setIsSaving] = useState(false);
   const [lastSaved, setLastSaved] = useState(null);
+  const [showSaveNotification, setShowSaveNotification] = useState(false);
 
   const editor = useEditor({
     extensions: [StarterKit],
@@ -97,6 +98,9 @@ const CollaborativeEditor = ({
     const handleDocumentSaved = ({ versionNumber, timestamp }) => {
       console.log("Document saved:", versionNumber);
       setLastSaved(new Date(timestamp));
+
+      setShowSaveNotification(true);
+      setTimeout(() => setShowSaveNotification(false), 3000);
     };
 
     const handleTitleUpdated = ({ title, userId }) => {
@@ -135,13 +139,20 @@ const CollaborativeEditor = ({
   }
 
   return (
-    <div className="overflow-hidden rounded-lg bg-white shadow-lg">
+    <div className="overflow-hidden rounded-lg bg-white shadow-lg flex-1">
       <ActiveUsers users={activeUsers} currentUser={currentUser} />
 
       <Toolbar editor={editor} />
 
       <div className="p-6">
         <EditorContent editor={editor} />
+
+        {showSaveNotification && (
+          <div className="animate-fade-in-out absolute top-4 right-4 flex items-center gap-2 rounded-lg bg-green-600 px-4 py-2 text-white shadow-lg">
+            <Check size={16} />
+            <span>Version saved</span>
+          </div>
+        )}
       </div>
 
       <div className="flex items-center justify-between border-t border-gray-300 bg-gray-50 px-4 py-2 text-sm text-gray-600">
